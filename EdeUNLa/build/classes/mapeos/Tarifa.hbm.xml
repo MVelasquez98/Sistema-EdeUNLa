@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="datos.Tarifa" table="Tarifa">
+		<id column="idTarifa" name="idTarifa">
+			<generator class="identity" />
+		</id>
+		<property column="codigo" name="codigo" type="string" />
+		<joined-subclass name="datos.TarifaIndustrial" table="TarifaIndustrial">
+			<key column="idTarifa" />
+			
+			<property column="potenciaMayor" name="potenciaMayor" type="boolean" />
+			<property column="cargoFijo" name="cargoFijo" type="int" />
+			<property column="cargoVariablePico" name="cargoVariablePico"
+				type="int" />
+			<property column="cargoVariableValle" name="cargoVariableValle"
+				type="int" />
+			<property column="cargoVariableResto" name="cargoVariableResto"
+				type="int" />
+
+			<property column="tension" name="tension" type="string" />
+		</joined-subclass>
+		<joined-subclass name="datos.TarifaResidencial" table="TarifaResidencial">
+			<key column="idTarifa" />
+			<property column="montoMinimo" name="montoMinimo" type="int" />
+			<property column="cargoVariable" name="cargoVariable" type="int" />
+		</joined-subclass>
+	</class>
+</hibernate-mapping>
